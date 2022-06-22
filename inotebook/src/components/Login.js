@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import UserContext from "../auth/UserContext";
 
 const Login = () => {
-  const handleSubmit = (e)=>{
+  let context = useContext(UserContext);
+  let {login} = context;
+  const handleSubmit = (e) => {
     e.preventDefault();
-  }
+  };
   const handleClick = () => {
     console.log("Clicked");
-    console.log(creditial)
+    console.log(creditial);
+    login(creditial);
+  };
+  const [creditial, setCreditial] = useState({ email: "", password: "" });
 
-  }
-  const [creditial, setCreditial] = useState({email:"",passowrd:""})
-
-  const handleChange = (e)=>{
-    setCreditial({...creditial, [e.target.name]:e.target.value})
-  }
+  const handleChange = (e) => {
+    setCreditial({ ...creditial, [e.target.name]:e.target.value });
+  };
 
   return (
     <div className="container">
@@ -32,24 +35,25 @@ const Login = () => {
                 <input
                   type="email"
                   className="form-control"
-                  id="floatingInput"
+                  id="email"
                   placeholder="name@example.com"
                   name="email"
                   value={creditial.email}
+                  onChange={handleChange}
                 />
-                <label htmlFor="floatingInput">Email address</label>
+                <label htmlFor="email">Email address</label>
               </div>
               <div className="form-floating">
-                <input
+              <input
                   type="password"
                   className="form-control"
-                  id="floatingPassword"
+                  id="password"
                   placeholder="Password"
                   name="password"
                   value={creditial.passowrd}
                   onChange={handleChange}
                 />
-                <label htmlFor="floatingPassword">Password</label>
+                <label htmlFor="password">Password</label>
               </div>
 
               <div className="checkbox mb-3">
@@ -57,7 +61,11 @@ const Login = () => {
                   <input type="checkbox" value="remember-me" /> Remember me
                 </label>
               </div>
-              <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleClick}>
+              <button
+                className="w-100 btn btn-lg btn-primary"
+                type="submit"
+                onClick={handleClick}
+              >
                 Sign in
               </button>
               <p className="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
