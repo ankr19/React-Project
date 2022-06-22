@@ -50,7 +50,7 @@ const Login = () => {
                   id="password"
                   placeholder="Password"
                   name="password"
-                  value={creditial.passowrd}
+                  value={creditial.password}
                   onChange={handleChange}
                 />
                 <label htmlFor="password">Password</label>
