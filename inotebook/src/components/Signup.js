@@ -5,68 +5,68 @@ const Signup = () => {
     <div className="container">
       <form class="row g-3 needs-validation" novalidate>
         <div class="col-md-4 position-relative">
-          <label for="validationTooltip01" class="form-label">
+          <label for="Fname" class="form-label">
             First name
           </label>
           <input
             type="text"
             class="form-control"
-            id="validationTooltip01"
+            id="Fname"
             value="Mark"
             required
           />
           <div class="valid-tooltip">Looks good!</div>
         </div>
         <div class="col-md-4 position-relative">
-          <label for="validationTooltip02" class="form-label">
+          <label for="Lname" class="form-label">
             Last name
           </label>
           <input
             type="text"
             class="form-control"
-            id="validationTooltip02"
+            id="Lname"
             value="Otto"
             required
           />
           <div class="valid-tooltip">Looks good!</div>
         </div>
         <div class="col-md-4 position-relative">
-          <label for="validationTooltipUsername" class="form-label">
+          <label for="Email" class="form-label">
             Email
           </label>
           <div class="input-group has-validation">
             <span
               class="input-group-text"
-              id="validationTooltipUsernamePrepend"
+              id="EmailPrepend"
             >
               <i class="bi bi-envelope"></i>
             </span>
             <input
               type="text"
               class="form-control"
-              id="validationTooltipUsername"
-              aria-describedby="validationTooltipUsernamePrepend"
+              id="Email"
+              aria-describedby="EmailPrepend"
               required
             />
             <div class="invalid-tooltip">Please enter valid Email.</div>
           </div>
         </div>
         <div class="col-md-4 position-relative">
-          <label for="validationTooltipUsername" class="form-label">
+          <label for="Password" class="form-label">
             password
           </label>
           <div class="input-group has-validation">
             <span
               class="input-group-text"
-              id="validationTooltipUsernamePrepend"
+              id="PasswordPrepend"
             >
               <i class="bi bi-lock-fill"></i>
             </span>
             <input
               type="text"
               class="form-control"
-              id="validationTooltipUsername"
-              aria-describedby="validationTooltipUsernamePrepend"
+              id="Password"
+              aria-describedby="PasswordPrepend"
               required
             />
             <div class="invalid-tooltip">Please enter valid Email.</div>
