@@ -1,0 +1,4 @@
+{
+    "name":"Burger",
+    "imgurl":require("../images/Chicken dish1.jpg"),
+}
