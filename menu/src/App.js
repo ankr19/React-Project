@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
-import Jcard from './components/Jcard';
+import Home from './components/Home';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="container">
-      <Jcard />
-    </div>
+    <>
+      
+      <Navbar />
+      <Home />
+    </>
   );
 }
 
