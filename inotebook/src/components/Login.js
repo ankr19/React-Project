@@ -8,8 +8,6 @@ const Login = () => {
     e.preventDefault();
   };
   const handleClick = () => {
-    console.log("Clicked");
-    console.log(creditial);
     login(creditial);
   };
   const [creditial, setCreditial] = useState({ email: "", password: "" });
