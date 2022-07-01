@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+import AddNote from "./AddNote";
 
 const Home = () => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <>
+      <div className="container">
+        <AddNote />
+      </div>
+    </>
+  );
+};
 
-export default Home
+export default Home;

@@ -1,6 +1,10 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../auth/UserContext";
 const Navbar = () => {
+  let context = useContext(UserContext);
+  let success = context;
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -37,7 +41,7 @@ const Navbar = () => {
             </div>
           </div>
           <Link type="button" className="btn btn-outline-primary mx-2" to="/login">
-            Login
+            {!success ? "LogOut":"Login"}
           </Link>
           <Link type="button" className="btn btn-outline-primary" to="/signup">
             SignUp
