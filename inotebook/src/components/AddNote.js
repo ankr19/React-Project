@@ -17,7 +17,7 @@ const AddNote = () => {
   };
 
   const handleClick = () => {
-    addNote(note);
+    addNote(note.title, note.desc, note.tag);
     setNotes({ title: "", desc: "", tag: "" })
   };
   return (
@@ -36,6 +36,8 @@ const AddNote = () => {
             aria-describedby="titleHelp"
             value={note.title}
             onChange={handleChange}
+            minLength={5}
+            required
           />
           <div id="emailHelp" className="form-text">
             We'll never share your Notes with anyone else.
@@ -53,6 +55,8 @@ const AddNote = () => {
             value={note.desc}
             onChange={handleChange}
             aria-describedby="descHelp"
+            minLength={5}
+            required
           />
         </div>
         <div className="mb-3">
@@ -69,7 +73,7 @@ const AddNote = () => {
             aria-describedby="tagHelp"
           />
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleClick}>
+        <button disabled={note.title.length<5 || note.desc.length<5} type="submit" className="btn btn-primary" onClick={handleClick}>
           Submit
         </button>
       </form>

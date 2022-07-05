@@ -23,6 +23,7 @@ const UserState = (props) => {
     {
       localStorage.setItem('token', json.authtoken);
       history('/');
+      
       setSuccess(json.success);
     }
     else{

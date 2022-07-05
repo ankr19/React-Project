@@ -3,7 +3,7 @@ import { useContext } from "react";
 import NoteContext from "../auth/NoteContext";
 
 const NoteItem = (props) => {
-  let { note } = props;
+  let { note, updateNote } = props;
   const context = useContext(NoteContext);
   const { deleteNote } = context;
   return (
@@ -12,10 +12,28 @@ const NoteItem = (props) => {
         <div className="card-body">
           <div className="d-flex align-items-center">
             <h5 className="card-title">{note.title}</h5>
-            <button className="btn btn-outline-secondary mx-2" type="button" onClick={()=>{deleteNote(note._id)}}><i className="bi bi-trash3-fill"></i></button>
-            <button className="btn btn-outline-secondary mx-2" type="button"><i className="bi bi-pencil-square"></i></button>
+            <button
+              className="btn btn-outline-secondary mx-2"
+              type="button"
+              onClick={() => {
+                deleteNote(note._id);
+              }}
+            >
+              <i className="bi bi-trash3-fill"></i>
+            </button>
+            <button
+              className="btn btn-outline-secondary mx-2"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              onClick={() => {
+                updateNote(note);
+              }}
+            >
+              <i className="bi bi-pencil-square"></i>
+            </button>
           </div>
-          <p className="card-subtitle mb-2 text-muted">{note.desc}</p>
+          <p className="card-subtitle mb-2 text-muted">{note.description}</p>
           <p className="card-subtitle mb-2 text-muted">{note.tag}</p>
         </div>
       </div>

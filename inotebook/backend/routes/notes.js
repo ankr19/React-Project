@@ -59,8 +59,8 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
     if (tag) {
       newNotes.tag = tag;
     }
-    console.log(newNotes)
-    console.log(req.params.id)
+    // console.log(newNotes)
+    // console.log(req.params.id)
     // const note = Notes.findByIdAndUpdate()
     let note = await Notes.findById(req.params.id);
     // checking the id is in the db or not

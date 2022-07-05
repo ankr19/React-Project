@@ -1,101 +1,102 @@
 import React from "react";
+import { useState } from "react";
 
 const Signup = () => {
+  const [creditial, setCreditial]=useState({name:"", email:"", password:""})
+  const handleChange = (e)=> {
+    setCreditial({...creditial, [e.target.name]:e.target.value})
+  }
   return (
     <div className="container">
-      <form class="row g-3 needs-validation" novalidate>
-        <div class="col-md-4 position-relative">
-          <label for="Fname" class="form-label">
-            First name
+      <form className="row g-3 needs-validation" noValidate>
+        <div className="col-md-4 position-relative">
+          <label htmlFor="Fname" className="form-label">
+            Full Name
           </label>
           <input
             type="text"
-            class="form-control"
-            id="Fname"
-            value="Mark"
+            className="form-control"
+            id="name"
+            name="name"
+            value={creditial.name}
+            onChange={handleChange}
             required
           />
-          <div class="valid-tooltip">Looks good!</div>
+          <div className="valid-tooltip">Looks good!</div>
         </div>
-        <div class="col-md-4 position-relative">
-          <label for="Lname" class="form-label">
-            Last name
-          </label>
-          <input
-            type="text"
-            class="form-control"
-            id="Lname"
-            value="Otto"
-            required
-          />
-          <div class="valid-tooltip">Looks good!</div>
-        </div>
-        <div class="col-md-4 position-relative">
-          <label for="Email" class="form-label">
+        <div className="col-md-4 position-relative">
+          <label htmlFor="Email" className="form-label">
             Email
           </label>
-          <div class="input-group has-validation">
+          <div className="input-group has-validation">
             <span
-              class="input-group-text"
-              id="EmailPrepend"
+              className="input-group-text"
+              id="email"
+              
             >
-              <i class="bi bi-envelope"></i>
+              <i className="bi bi-envelope"></i>
             </span>
             <input
               type="text"
-              class="form-control"
-              id="Email"
+              className="form-control"
+              id="email"
+              name="email"
+              value={creditial.email}
               aria-describedby="EmailPrepend"
               required
             />
-            <div class="invalid-tooltip">Please enter valid Email.</div>
+            <div className="invalid-tooltip">Please enter valid Email.</div>
           </div>
         </div>
-        <div class="col-md-4 position-relative">
-          <label for="Password" class="form-label">
+        <div className="col-md-4 position-relative">
+          <label htmlFor="Password" className="form-label">
             password
           </label>
-          <div class="input-group has-validation">
+          <div className="input-group has-validation">
             <span
-              class="input-group-text"
+              className="input-group-text"
               id="PasswordPrepend"
             >
-              <i class="bi bi-lock-fill"></i>
+              <i className="bi bi-lock-fill"></i>
             </span>
             <input
               type="text"
-              class="form-control"
-              id="Password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={creditial.password}
               aria-describedby="PasswordPrepend"
               required
             />
-            <div class="invalid-tooltip">Please enter valid Email.</div>
+            <div className="invalid-tooltip">Please enter valid Email.</div>
           </div>
         </div>
-        <div class="col-md-4 position-relative">
-          <label for="validationTooltipUsername" class="form-label">
+        <div className="col-md-4 position-relative">
+          <label htmlFor="validationTooltipUsername" className="form-label">
             Re-password
           </label>
-          <div class="input-group has-validation">
+          <div className="input-group has-validation">
             <span
-              class="input-group-text"
+              className="input-group-text"
               id="validationTooltipUsernamePrepend"
             >
-              <i class="bi bi-lock-fill"></i>
+              <i className="bi bi-lock-fill"></i>
             </span>
             <input
               type="text"
-              class="form-control"
-              id="validationTooltipUsername"
+              className="form-control"
+              id="password"
+              name="password"
+              value={creditial.password}
               aria-describedby="validationTooltipUsernamePrepend"
               required
             />
-            <div class="invalid-tooltip">Please enter valid Email.</div>
+            <div className="invalid-tooltip">Please enter valid Email.</div>
           </div>
         </div>
 
-        <div class="col-12">
-          <button class="btn btn-primary" type="submit">
+        <div className="col-12">
+          <button className="btn btn-primary" type="submit">
             Submit form
           </button>
         </div>
