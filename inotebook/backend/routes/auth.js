@@ -18,6 +18,7 @@ router.post(
   ],
   async (req, res) => {
     // if there are errors return bad request and the errors
+    let success = false;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -26,7 +27,7 @@ router.post(
     try {
       let user = await User.findOne({ email: req.body.email });
       if (user) {
-        return res.status(400).json({ error: "Sorry a user already exists" });
+        return res.status(400).json({ error: "Sorry a user already exists",success: success });
       }
       // creating the hashing code method
       const salt = await bcrypt.genSalt(10);
@@ -49,9 +50,10 @@ router.post(
         },
       };
       const authtoken = jwt.sign(data, jwt_secret);
-     
+      success = true;
+      
       // res.json(user);
-      res.json({ authtoken});
+      res.json({ authtoken, success});
     } catch (error) {
       console.log(error.message);
       res.status(500).send("some Error occured");

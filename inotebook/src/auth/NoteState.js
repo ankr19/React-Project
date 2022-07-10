@@ -4,7 +4,7 @@ import NoteContext from "./NoteContext";
 
 const NoteState = (props) => {
   const [notes, setNotes] = useState([]);
-  const [alert, setAlert] = useState({ alert: "", message: "" });
+  // const [alert, setAlert] = useState({ alert: "", message: "" });
 
   let allNote = async () => {
     const response = await fetch(
@@ -13,13 +13,13 @@ const NoteState = (props) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmNjOWZiYjBlMzBiYzViZjRiZWQyNiIsImlhdCI6MTY0NzQ1MzM0OX0.ckTTen-s2gPn1agT_0QfMTs4J6DAdYbCSgpKUO9gUsc",
+          "auth-token": localStorage.getItem('token'),
         },
       }
     );
     const initialnotes = await response.json();
     setNotes(initialnotes);
+    
   };
 
   let addNote = async (title, description, tag) => {
@@ -28,15 +28,15 @@ const NoteState = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmNjOWZiYjBlMzBiYzViZjRiZWQyNiIsImlhdCI6MTY0NzQ1MzM0OX0.ckTTen-s2gPn1agT_0QfMTs4J6DAdYbCSgpKUO9gUsc",
+        "auth-token": localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag }),
     });
 
     const json = await response.json();
     setNotes(notes.concat(json));
-    setAlert({ alert: "success", message: "Success Adding" });
+    props.showAlert("added the note successfully","success");
+    // setAlert({ alert: "success", message: "Success Adding" });
   };
 
   const deleteNote = async (id) => {
@@ -47,8 +47,7 @@ const NoteState = (props) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "auth-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmNjOWZiYjBlMzBiYzViZjRiZWQyNiIsImlhdCI6MTY0NzQ1MzM0OX0.ckTTen-s2gPn1agT_0QfMTs4J6DAdYbCSgpKUO9gUsc",
+          "auth-token": localStorage.getItem('token'),
         },
       }
     );
@@ -57,7 +56,8 @@ const NoteState = (props) => {
       return note._id !== id;
     });
     setNotes(newNotes);
-    setAlert({ alert: "warning", message: "Deleted a Note" });
+    props.showAlert("deleted the note successfully","secondary");
+    // setAlert({ alert: "warning", message: "Deleted a Note" });
   };
 
   const editNote = async (id, title, description, tag) => {
@@ -68,8 +68,7 @@ const NoteState = (props) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "auth-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmNjOWZiYjBlMzBiYzViZjRiZWQyNiIsImlhdCI6MTY0NzQ1MzM0OX0.ckTTen-s2gPn1agT_0QfMTs4J6DAdYbCSgpKUO9gUsc",
+          "auth-token": localStorage.getItem('token'),
         },
         body: JSON.stringify({ title, description, tag }),
       }
@@ -87,13 +86,13 @@ const NoteState = (props) => {
         break;
       }
     }
-    setAlert({alert:"secondary",message:"updating a note"})
     setNotes(newNote);
+    props.showAlert("updated the note successfully","success");
   };
 
   return (
     <NoteContext.Provider
-      value={{ notes, allNote, addNote, editNote, deleteNote, alert }}
+      value={{ notes, allNote, addNote, editNote, deleteNote}}
     >
       {props.children}
     </NoteContext.Provider>

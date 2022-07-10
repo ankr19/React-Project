@@ -7,6 +7,7 @@ const UserState = (props) => {
   //const [creditial, setCreditial] = useState({email:"",password:""})
   let history = useNavigate();
   const [success, setSuccess] = useState(false);
+
   const login = async (creditial) => {
     const response = await fetch("http://localhost:5000/api/auth/login", {
       method: "POST",
@@ -19,19 +20,43 @@ const UserState = (props) => {
       }),
     });
     const json = await response.json();
-    if(json.success)
-    {
-      localStorage.setItem('token', json.authtoken);
-      history('/');
-      
+    if (json.success) {
+      localStorage.setItem("token", json.authtoken);
+      history("/");
       setSuccess(json.success);
-    }
-    else{
-      alert('Invalid Creditials')
+      props.showAlert("Logging successfully", "success");
+    } else {
+      alert("Invalid Creditials");
     }
   };
+
+  const signup = async (name, email, password) => {
+    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+      }),
+    });
+    const json = await response.json();
+    if (json.success) {
+      localStorage.setItem("token", json.authtoken);
+      console.log(json)
+      
+      setSuccess(json.success);
+      props.showAlert("SignUp successfully","success");
+      history("/");
+    } else {
+      props.showAlert("Invalid Creditials","danger");
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ login, success }}>
+    <UserContext.Provider value={{ login, signup }}>
       {props.children}
     </UserContext.Provider>
   );

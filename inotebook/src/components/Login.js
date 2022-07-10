@@ -3,17 +3,18 @@ import UserContext from "../auth/UserContext";
 
 const Login = () => {
   let context = useContext(UserContext);
-  let {login} = context;
+  let { login } = context;
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   const handleClick = () => {
     login(creditial);
+    setCreditial({ email: "", password: "" });
   };
   const [creditial, setCreditial] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
-    setCreditial({ ...creditial, [e.target.name]:e.target.value });
+    setCreditial({ ...creditial, [e.target.name]: e.target.value });
   };
 
   return (
@@ -42,7 +43,7 @@ const Login = () => {
                 <label htmlFor="email">Email address</label>
               </div>
               <div className="form-floating">
-              <input
+                <input
                   type="password"
                   className="form-control"
                   id="password"

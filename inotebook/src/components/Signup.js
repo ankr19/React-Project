@@ -1,11 +1,36 @@
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
+import UserContext from "../auth/UserContext";
 
 const Signup = () => {
-  const [creditial, setCreditial]=useState({name:"", email:"", password:""})
-  const handleChange = (e)=> {
-    setCreditial({...creditial, [e.target.name]:e.target.value})
-  }
+  const [creditial, setCreditial] = useState({
+    name: "",
+    email: "",
+    password: "",
+    epassword: "",
+  });
+  let context = useContext(UserContext);
+  let { signup } = context;
+
+  const handleChange = (e) => {
+    setCreditial({ ...creditial, [e.target.name]: e.target.value });
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    check(creditial.password, creditial.epassword);
+    console.log("sign up: ", creditial);
+    signup(creditial.name, creditial.email, creditial.password);
+  };
+
+  const check = (password, password2) => {
+    if (password === password2) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <div className="container">
       <form className="row g-3 needs-validation" noValidate>
@@ -29,11 +54,7 @@ const Signup = () => {
             Email
           </label>
           <div className="input-group has-validation">
-            <span
-              className="input-group-text"
-              id="email"
-              
-            >
+            <span className="input-group-text" id="email">
               <i className="bi bi-envelope"></i>
             </span>
             <input
@@ -43,6 +64,7 @@ const Signup = () => {
               name="email"
               value={creditial.email}
               aria-describedby="EmailPrepend"
+              onChange={handleChange}
               required
             />
             <div className="invalid-tooltip">Please enter valid Email.</div>
@@ -53,22 +75,20 @@ const Signup = () => {
             password
           </label>
           <div className="input-group has-validation">
-            <span
-              className="input-group-text"
-              id="PasswordPrepend"
-            >
+            <span className="input-group-text" id="PasswordPrepend">
               <i className="bi bi-lock-fill"></i>
             </span>
             <input
-              type="text"
+              type="password"
               className="form-control"
               id="password"
               name="password"
               value={creditial.password}
               aria-describedby="PasswordPrepend"
+              onChange={handleChange}
               required
             />
-            <div className="invalid-tooltip">Please enter valid Email.</div>
+            <div className="invalid-tooltip">Please enter valid Password.</div>
           </div>
         </div>
         <div className="col-md-4 position-relative">
@@ -83,20 +103,25 @@ const Signup = () => {
               <i className="bi bi-lock-fill"></i>
             </span>
             <input
-              type="text"
+              type="password"
               className="form-control"
-              id="password"
-              name="password"
-              value={creditial.password}
+              id="epassword"
+              name="epassword"
+              value={creditial.epassword}
+              onChange={handleChange}
               aria-describedby="validationTooltipUsernamePrepend"
               required
             />
-            <div className="invalid-tooltip">Please enter valid Email.</div>
+            <div className="invalid-tooltip">Please enter valid Password.</div>
           </div>
         </div>
 
         <div className="col-12">
-          <button className="btn btn-primary" type="submit">
+          <button
+            onClick={handleClick}
+            className="btn btn-primary"
+            type="submit"
+          >
             Submit form
           </button>
         </div>

@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import NoteContext from "../auth/NoteContext";
 import AddNote from "./AddNote";
-import Alert from "./Alert";
 import NoteItem from "./NoteItem";
 
-const Home = () => {
+const Home = (props) => {
   const context = useContext(NoteContext);
 
-  const { notes, allNote, alert, editNote } = context;
-
+  const { notes, allNote, editNote } = context;
+  let history = useNavigate();
   const ref = useRef(null);
   const refClose = useRef(null);
 
@@ -20,7 +20,12 @@ const Home = () => {
   });
 
   useEffect(() => {
-    allNote();
+    if (localStorage.getItem("token")) {
+      allNote();
+    } else {
+      history("/login");
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -49,7 +54,6 @@ const Home = () => {
 
   return (
     <>
-      <Alert alert={alert.alert} message={alert.message} />
       <div className="container">
         <AddNote />
       </div>

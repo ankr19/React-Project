@@ -1,10 +1,15 @@
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../auth/UserContext";
 const Navbar = () => {
-  let context = useContext(UserContext);
-  let success = context;
+  // let context = useContext(UserContext);
+  let history = useNavigate();
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    history("/login");
+  };
+  // let success = context;
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,12 +45,33 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
-          <Link type="button" className="btn btn-outline-primary mx-2" to="/login">
-            {!success ? "LogOut":"Login"}
-          </Link>
-          <Link type="button" className="btn btn-outline-primary" to="/signup">
-            SignUp
-          </Link>
+          {!(localStorage.getItem("token")) ? (
+            <form className="d-flex">
+              <Link
+                type="button"
+                className="btn btn-outline-primary mx-2"
+                to="/login"
+              >
+                Login
+              </Link>
+              <Link
+                type="button"
+                className="btn btn-outline-primary"
+                to="/signup"
+              >
+                SignUp
+              </Link>
+            </form>
+          ) : (
+            <Link
+              className="btn btn-outline-primary"
+              to="/login"
+              onClick={handleLogOut}
+              role="button"
+            >
+              LogOut
+            </Link>
+          )}
         </div>
       </nav>
     </>
