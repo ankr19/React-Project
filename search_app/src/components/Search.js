@@ -2,10 +2,10 @@ import React, { useRef } from "react";
 import Clothcd from "./Clothcd";
 
 const Search = () => {
-  const ref = useRef();
+  const ref = useRef(null);
   return (
     <div className="container text-center w-50">
-      <div className="input-group input-group-lg border border-white">
+      <div className="input-group input-group-lg border border-white ">
         <input
           type="text"
           className="form-control border-0"
@@ -35,7 +35,7 @@ const Search = () => {
             <div className="col float-start">
               <h6>Latest Trend</h6>
             </div>
-            <div className="col">
+            <div className="row">
               <Clothcd />
             </div>
           </div>
