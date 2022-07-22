@@ -1,0 +1,18 @@
+{
+  "name": "restro",
+  "version": "1.0.0",
+  "description": "Creating a restro with admin and user views",
+  "main": "app.js",
+  "scripts": {
+    "nodemon": "nodemon app.js"
+  },
+  "author": "Anand",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.4.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
