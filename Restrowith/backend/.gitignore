@@ -6,4 +6,4 @@
 .pnp.js
 
 #ignoring the envi
-.app.env
+/.app.env
