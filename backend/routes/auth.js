@@ -20,6 +20,7 @@ router.post(
   async (req, res) => {
     // if there are errors return bad request and the errors
     const errors = validationResult(req);
+    let success = false;
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -49,10 +50,11 @@ router.post(
           id: user.id,
         },
       };
-      const authtoken = jwt.sign(data, jwt_secret);
 
+      const authtoken = jwt.sign(data, jwt_secret);
+      success = true;
       // res.json(user);
-      res.json({ authtoken });
+      res.json({ authtoken, success });
     } catch (error) {
       console.log(error.message);
       res.status(500).send("some Error occured");
