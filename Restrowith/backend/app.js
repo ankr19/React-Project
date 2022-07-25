@@ -1,15 +1,15 @@
-const connectToMongo = require('./db/db');
-const express = require('express')
-require('dotenv').config({ path: './app.env' })
+const connectToMongo = require("./db/db");
+const express = require("express");
+require("dotenv").config({ path: "./.env" });
 
 connectToMongo();
-const app = express()
-const port = 5000
-app.get('/', (req, res) => {
-    res.send('Hello harry')
-})
-console.log("secret key",process.env.secret_key);
-console.log("secret key",process.env.secret_token);
+const app = express();
+const port = process.env.port;
+
+// defining the routes
+app.use(express.json());
+app.use('/api/auth', require('./routes/auth'));
+
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+  console.log(`Example app listening at http://localhost:${port}`);
+});
