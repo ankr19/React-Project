@@ -52,6 +52,7 @@ const UserState = (props) => {
       history("/");
     } else {
       props.showAlert("Invalid Creditials","danger");
+      history('/login')
     }
   };
 

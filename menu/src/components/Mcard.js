@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import CartContext from "../auth/CartContext";
 
 const Mcard = (props) => {
+  const context = useContext(CartContext);
+  const { addItem } = context;
+  const handleClick = (e)=>{
+    e.preventDefault();
+    console.log()
+  }
   return (
     <div>
       <div
@@ -23,10 +30,11 @@ const Mcard = (props) => {
         </button>
         <div className="card-body">
           <h5 className="card-title">{props.name}</h5>
-          <p className="card-text">
-            {props.price}
-          </p>
+          <p className="card-text">{props.price}</p>
         </div>
+        <button className="btn btn-outline-primary" onClick={handleClick(props)}>
+          Buy
+        </button>
       </div>
     </div>
   );

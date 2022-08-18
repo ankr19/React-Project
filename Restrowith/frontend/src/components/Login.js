@@ -1,11 +1,37 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  let history = useNavigate();
+
+  const login = async (creditial) => {
+    const response = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: creditial.email,
+        password: creditial.password,
+      }),
+    });
+    const json = await response.json();
+    if (json.success) {
+      localStorage.setItem("token", json.authtoken);
+      history("/");
+      if(json.ad)
+      {
+        localStorage.setItem("ad", json.ad);
+      }
+    } else {
+      alert("Invalid Creditials");
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   const handleClick = () => {
-    // login(creditial);
+    login(creditial.email, creditial.password);
     setCreditial({ email: "", password: "" });
   };
   const [creditial, setCreditial] = useState({ email: "", password: "" });
@@ -54,8 +80,8 @@ const Login = () => {
                   id="password"
                   placeholder="Password"
                   name="password"
-                  // value={creditial.password}
-                  // onChange={handleChange}
+                  value={creditial.password}
+                  onChange={handleChange}
                 />
                 <label htmlFor="password">Password</label>
               </div>

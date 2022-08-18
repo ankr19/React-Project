@@ -4,7 +4,7 @@ import React from "react";
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-transparent navbar-dark" style={{fontSize:"150%"}}>
+      <nav className="navbar navbar-expand-lg" style={{fontSize:"150%", backgroundColor:"#e3f2fd"}}>
         <div className="container-fluid mx-2">
           <Link className="navbar-brand" to="/">
             Navbar

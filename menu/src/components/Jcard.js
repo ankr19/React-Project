@@ -24,7 +24,7 @@ const Jcard = () => {
           imageurl.map((menu)=>{
             return(
               <div className="col-md-4" key={menu.imgurl}>
-                <Card src={menu.imgurl} name={menu.name} price={menu.price} rating={menu.rating} />
+                <Card props={menu} />
               </div>
             )
           })

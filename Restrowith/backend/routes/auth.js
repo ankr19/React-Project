@@ -58,4 +58,50 @@ router.post(
   }
 );
 
+// route 2
+// creating a user using Post "api/auth/login"
+router.post(
+  "/login",
+  [
+    body("email", "enter a proper ").isEmail(),
+    body("password", "Enter the Proper Creditial").exists(),
+  ],
+  async (req, res) => {
+    // if there are errors return bad request and the errors
+    let success = false;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const { email, password } = req.body;
+    try {
+      let user = await User.findOne({ email });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ errors: "Please enter the Proper Creditial" });
+      }
+      const passwordCompare = await bcrypt.compare(password, user.password);
+      if (!passwordCompare) {
+        return res
+          .status(400)
+          .json({ errors: "Please enter the Proper Creditial" });
+      }
+
+      const data = {
+        id: user.id,
+      };
+      // creating the token
+      const authtoken = jwt.sign(data, jwt_secret);
+      success = true;
+      // res.json(user);
+      res.json({ success, authtoken });
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).send("Internal Server error");
+    }
+  }
+);
+
+
 module.exports = router;

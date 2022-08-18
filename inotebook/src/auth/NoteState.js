@@ -74,8 +74,10 @@ const NoteState = (props) => {
       }
     );
 
-    const json = response.json();
+    const json = await response.json();
     let newNote = JSON.parse(JSON.stringify(notes));
+    console.log(json);
+    console.log(newNote);
     // logic to edit
     for (let index = 0; index < newNote.length; index++) {
       const element = newNote[index];

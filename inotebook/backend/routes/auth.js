@@ -27,7 +27,9 @@ router.post(
     try {
       let user = await User.findOne({ email: req.body.email });
       if (user) {
-        return res.status(400).json({ error: "Sorry a user already exists",success: success });
+        return res
+          .status(400)
+          .json({ error: "Sorry a user already exists", success: success });
       }
       // creating the hashing code method
       const salt = await bcrypt.genSalt(10);
@@ -51,9 +53,9 @@ router.post(
       };
       const authtoken = jwt.sign(data, jwt_secret);
       success = true;
-      
+
       // res.json(user);
-      res.json({ authtoken, success});
+      res.json({ authtoken, success });
     } catch (error) {
       console.log(error.message);
       res.status(500).send("some Error occured");
@@ -82,13 +84,19 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ errors: "Please enter the Proper Creditial", success: success });
+          .json({
+            errors: "Please enter the Proper Creditial",
+            success: success,
+          });
       }
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
         return res
           .status(400)
-          .json({ errors: "Please enter the Proper Creditial",success: success });
+          .json({
+            errors: "Please enter the Proper Creditial",
+            success: success,
+          });
       }
 
       const data = {
@@ -116,7 +124,7 @@ router.post("/getuser", fetchuser, async (req, res) => {
   // checking whether the user exists or not
   try {
     var userId = req.user.id;
-    const user = await User.findById(userId).select('-password');
+    const user = await User.findById(userId).select("-password");
     res.send(user);
     if (!user) {
       return res.status(400).json({ error: "Sorry a user already exists" });

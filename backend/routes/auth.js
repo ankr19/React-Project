@@ -63,7 +63,7 @@ router.post(
 );
 
 // route 2
-// creating a user using Post "api/auth/login"
+// creating a login using Post "api/auth/login"
 router.post(
   "/login",
   [

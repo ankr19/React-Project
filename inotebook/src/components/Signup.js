@@ -19,9 +19,15 @@ const Signup = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    check(creditial.password, creditial.epassword);
+    if (check(creditial.password, creditial.epassword))
+    {
+      signup(creditial.name, creditial.email, creditial.password);
+    }
+    else{
+
+    }
     console.log("sign up: ", creditial);
-    signup(creditial.name, creditial.email, creditial.password);
+    
   };
 
   const check = (password, password2) => {
